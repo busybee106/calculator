@@ -1,33 +1,70 @@
-#display {
-    height: 100px;
-    width: 500px;
-    border-style: solid;
-    margin: auto;
-    border-radius: 10px;
-    margin-bottom: 5px;
-}
-
-#numbers {
-    display: flex;
-    height: 600px;
-    width: 500px;
-    border-style: solid;
-    border-radius: 10px;
-    margin: auto;
-    justify-content: space-around;
-    flex-flow: row wrap;
-}
-
-.box {
-    background: tomato;
-    padding: 5px;
-    width: 150px;
-    height: 125px;
-    margin-top: 5px;
-    line-height: 125px;
-    color: white;
+/* selects all elements, before elements, and after elements */
+*, *::before, *::after {
+    box-sizing: border-box; /*includes padding and border in height and weight*/
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     font-weight: bold;
-    font-size: 3em;
-    text-align: center;
-    border-radius: 25%;
+}
+
+body {
+    /* making these two zeroes will allow background color to fill entire screen */
+    padding: 0;
+    margin: 0;
+
+    background-color: wheat;
+}
+
+.calculator-grid {
+    display: grid;
+    justify-content: center;
+    align-content: center;
+
+    /* fill 100% of height all the time */
+    min-height: 100vh;
+
+    /*repeat 4 columns that are 100px wide*/
+    grid-template-columns: repeat(4, 100px); 
+
+    /* at min, we want this 120px tall, at max, as tall as it has to be to fit everything */
+    grid-template-rows: minmax(120px, auto) repeat(5, 100px);
+}
+
+/* select all buttons in the grid */
+.calculator-grid > button {
+    cursor: pointer;
+    font-size: 2rem;
+    border: 1px solid white;
+    /* remove outline that browsers add be default */
+    outline: none;
+    background-color: rgb(54, 114,185, .75);
+}
+
+.calculator-grid > button:hover {
+    background-color: rgb(255, 255, 255, .90);
+}
+
+.span-two {
+    grid-column: span 2;
+}
+
+.output {
+    /* go from column 1 to the last column */
+    grid-column: 1 / -1;
+    background-color: rgb(0, 0, 0, .75);
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-around;
+    flex-direction: column;
+    padding: 10px;
+    
+    word-wrap: break-word; /*break a word in the middle of it*/
+    word-break: break-all; /*be able to break all words*/
+}
+
+.output .previous-operand {
+    color: rgba(255, 255, 255, .75);
+}
+
+.output .current-operand {
+    color: white;
+    font-size: 2.5rem;
 }
